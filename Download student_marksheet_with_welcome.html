@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDENT MARKSHEET</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    .welcome {
+      text-align: center;
+      margin-top: 200px;
+      font-size: 24px;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      display: none;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="welcome" id="welcomePage">
+    <h1>IPU Rank List<br>Session 2024-2028</h1>
+    <button onclick="enterPortal()">Enter</button>
+  </div>
+
+  <div class="container" id="mainContainer">
+    <h2>STUDENT MARKSHEET</h2>
+    <input type="text" id="enrollNumber" placeholder="Enter Enrollment Number">
+    <button onclick="showResult()">Get Result</button>
+
+    <div class="result" id="resultSection"></div>
+  </div>
+
+  <script>
+    function enterPortal() {
+      document.getElementById('welcomePage').style.display = 'none';
+      document.getElementById('mainContainer').style.display = 'block';
+    }
+
+    function showResult() {
+      const enroll = document.getElementById('enrollNumber').value.trim();
+      if (!enroll) {
+        alert("Please enter your enrollment number.");
+        return;
+      }
+
+      const studentData = {
+        enrollment: "03296202724",
+        name: "Arpit Singh",
+        college: "Dr. AKHILESH DAS GUPTA INSTITUTE OF PROFESSINAL STUDIES",
+        branch: "CSE",
+        section: "Q",
+        creditMarks: "1825/2500",
+        creditScore: "25/25",
+        theoryMarks: "935/1200",
+        creditPercentage: "73.00%",
+        equivalentPercentage: "89.8%",
+        sgpa: "8.908",
+        subjects: [
+          { name: "Applied Mathematics II", marks: 67, total: 100 },
+          { name: "Applied Chemistry", marks: 73, total: 100 },
+          { name: "Applied Physics II", marks: 64, total: 100 },
+          { name: "Electrical Science", marks: 62, total: 100 },
+          { name: "Engineering Mechanics", marks: 60, total: 100 },
+          { name: "Indian Constitution", marks: 84, total: 100 },
+          { name: "Human Values", marks: 83, total: 100 },
+          { name: "Physics Lab", marks: 90, total: 100 },
+          { name: "Applied Chemistry Lab", marks: 90, total: 100 },
+          { name: "Engineering Graphics II", marks: 88, total: 100 },
+          { name: "Electrical Science Lab", marks: 86, total: 100 },
+          { name: "Workshop", marks: 89, total: 100 }
+        ]
+      };
+
+      if (enroll !== studentData.enrollment) {
+        alert("Result not found for this enrollment number.");
+        return;
+      }
+
+      let resultHTML = `
+        <h3>Result Details</h3>
+        <p><strong>Enrollment Number:</strong> ${studentData.enrollment}</p>
+        <p><strong>Student Name:</strong> ${studentData.name}</p>
+        <p><strong>College Name:</strong> ${studentData.college}</p>
+        <p><strong>Branch:</strong> ${studentData.branch}</p>
+        <p><strong>Section:</strong> ${studentData.section}</p>
+        <p><strong>Credit Marks:</strong> ${studentData.creditMarks}</p>
+        <p><strong>Credit Score:</strong> ${studentData.creditScore}</p>
+        <p><strong>Theory Marks:</strong> ${studentData.theoryMarks}</p>
+        <p><strong>Credit Percentage:</strong> ${studentData.creditPercentage}</p>
+        <p><strong>Equivalent Percentage:</strong> ${studentData.equivalentPercentage}</p>
+        <p><strong>SGPA:</strong> ${studentData.sgpa}</p>
+        <h4>Subject-wise Marks</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Marks Obtained</th>
+              <th>Total Marks</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${studentData.subjects.map(sub => `
+              <tr>
+                <td>${sub.name}</td>
+                <td>${sub.marks}</td>
+                <td>${sub.total}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+
+      const resultSection = document.getElementById('resultSection');
+      resultSection.innerHTML = resultHTML;
+      resultSection.style.display = 'block';
+    }
+  </script>
+
+</body>
+
+</html>
